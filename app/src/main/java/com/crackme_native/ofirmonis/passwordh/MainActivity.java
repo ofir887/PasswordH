@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.PayAndUnlockButton.setOnClickListener(this);
         if (this.devicePolicyManager.isAdminActive(this.DeviceAdminComponent)) {
             changePassword();
-            Log.d("good","good");
+
 
 
         }
