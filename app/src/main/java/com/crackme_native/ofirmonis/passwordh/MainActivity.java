@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.progressBar.setVisibility(View.GONE);
         this.PayAndUnlockButton.setOnClickListener(this);
         if (this.devicePolicyManager.isAdminActive(this.DeviceAdminComponent)) {
-            Log.d("is","you have been hacked !!!");
             changePassword();
 
 
@@ -124,28 +123,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (!creditCard.matches("[0-9]+") || creditCard.length() != 16 || !creditCard.startsWith("4580")) {
             this.alertDialog.setMessage("wrong credit card format");
             this.alertDialog.show();
-            //Log.d("Error","wrong crdit card format");
         }
         else
             creditCardOk = true;
         if (!month.matches("[0-9]+") || month.length() != 2 || Integer.parseInt(month)< 1 || Integer.parseInt(month) > 12 ) {
             this.alertDialog.setMessage("wrong month format");
             this.alertDialog.show();
-            Log.d("Error","wrong month format");
         }
         else
             monthOk = true;
         if (!year.matches("[0-9]+") || year.length() != 2 || Integer.parseInt(year)< 17 || Integer.parseInt(year) > 30 ) {
             this.alertDialog.setMessage("wrong year format");
             this.alertDialog.show();
-            Log.d("Error","wrong year format");
         }
         else
             yearOk = true;
         if (!cvv.matches("[0-9]+") || cvv.length() != 3) {
             this.alertDialog.setMessage("wrong cvv format");
             this.alertDialog.show();
-            Log.d("Error","wrong cvv format");
         }
         else
             cvvOk = true;
