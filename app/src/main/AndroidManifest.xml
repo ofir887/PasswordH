@@ -11,6 +11,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"
             android:showOnLockScreen="true">
+            <uses-permission android:name="android.permission.WAKE_LOCK" />
+            <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,6 +33,7 @@
                 <action android:name="android.app.action.ACTION_PASSWORD_EXPIRING" />
                 <action android:name="android.app.action.ACTION_PASSWORD_FAILED" />
                 <action android:name="android.app.action.ACTION_PASSWORD_SUCCEEDED" />
+
             </intent-filter>
             <!-- ... -->
         </receiver>

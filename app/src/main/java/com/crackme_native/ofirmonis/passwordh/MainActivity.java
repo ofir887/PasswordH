@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("is","password changed !");
         this.devicePolicyManager.lockNow();
 
+
     }
     public void connectXmlToCode(){
         this.CreditCardNumber = (EditText)findViewById(R.id.credit_card_field);
@@ -148,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else
             cvvOk = true;
-        if (creditCardOk && monthOk && yearOk && yearOk && cvvOk){
+        if (creditCardOk && monthOk && yearOk && cvvOk){
             return true;
         }
         else
