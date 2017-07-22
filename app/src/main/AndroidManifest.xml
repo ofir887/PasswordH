@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.crackme_native.ofirmonis.passwordh">
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <action android:name="android.intent.action.QUICKBOOT_POWERON" />
     <application
         android:allowBackup="true"
@@ -42,7 +44,7 @@
         </receiver>
         <receiver
 
-            android:name=".BootReceiver"
+            android:name="com.crackme_native.ofirmonis.passwordh.BootReceiver"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">

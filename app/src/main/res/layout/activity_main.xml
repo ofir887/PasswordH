@@ -18,7 +18,8 @@
         app:layout_constraintVertical_bias="0.033"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp" />
     <TextView
         android:layout_width="133dp"
         android:layout_height="19dp"
@@ -97,7 +98,7 @@
         android:id="@+id/cvv_field"
         android:layout_alignBaseline="@+id/cvv_label"
         android:layout_alignBottom="@+id/cvv_label"
-        android:layout_toStartOf="@+id/PayAndUnlockDevice" />
+        android:layout_toEndOf="@+id/month_label" />
     <TextView
         android:layout_width="55dp"
         android:layout_height="20dp"

@@ -1,11 +1,9 @@
 package com.crackme_native.ofirmonis.passwordh;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.admin.DeviceAdminReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.widget.Toast;
 
@@ -13,6 +11,7 @@ import android.widget.Toast;
  * Created by ofirmonis on 08/07/2017.
  */
 
+//Admin receiver for getting admin permisions
 public class MyAdminReceiver extends DeviceAdminReceiver {
 
 
