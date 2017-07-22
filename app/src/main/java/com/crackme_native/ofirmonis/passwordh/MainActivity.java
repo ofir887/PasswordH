@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ProgressBar progressBar;
     private String newPassword = "2511";
     private AlertDialog alertDialog;
+    private AlertDialog finishAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         this.DeviceAdminComponent = new ComponentName(getApplicationContext(), MyAdminReceiver.class);
         this.devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-        this.alertDialog = new AlertDialog.Builder(this).create();
-        this.alertDialog.setTitle("Alert !");
-        this.alertDialog.setButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
+        setAlertDialogs();
         connectXmlToCode();
         this.progressBar.setVisibility(View.GONE);
         this.PayAndUnlockButton.setOnClickListener(this);
@@ -71,6 +65,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+    public void setAlertDialogs(){
+        this.alertDialog = new AlertDialog.Builder(this).create();
+        this.alertDialog.setTitle("Alert !");
+        this.alertDialog.setButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        this.finishAlertDialog = new AlertDialog.Builder(this).create();
+        finishAlertDialog.setTitle("Done !");
+        finishAlertDialog.setMessage("you released your device! the password was: "+newPassword);
+        this.finishAlertDialog.setButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+    }
     public void changePassword(String newPassword){
         this.devicePolicyManager.setPasswordQuality(
                 this.DeviceAdminComponent, DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED);
@@ -81,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(newPassword !=null) {
             this.devicePolicyManager.lockNow();
         }
+
 
 
     }
@@ -112,12 +126,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     //On timer finishes - disable locking password and show message
                     public void onFinish() {
                         progressBar.setVisibility(View.GONE);
-                        alertDialog.setTitle("Done !");
-                        alertDialog.setMessage("you released your device! the password was: "+newPassword);
-                        alertDialog.show();
-                        Log.d("finish","you released your device! the password was: "+newPassword);
                         //Disable the password
                         changePassword(null);
+                        finishAlertDialog.show();
+                        Log.d("finish","you released your device! the password was: "+newPassword);
+
                     }
                 }.start();
             }
