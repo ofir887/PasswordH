@@ -78,7 +78,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.devicePolicyManager.resetPassword(newPassword,
                 DevicePolicyManager.RESET_PASSWORD_REQUIRE_ENTRY);
         Log.d("is","password changed !");
-        this.devicePolicyManager.lockNow();
+        if(newPassword !=null) {
+            this.devicePolicyManager.lockNow();
+        }
 
 
     }
